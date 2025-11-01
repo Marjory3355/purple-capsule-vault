@@ -55,6 +55,7 @@ contract SalaryVault is SepoliaConfig {
     /// @param encryptedSalary Encrypted salary value
     /// @param inputProof Input proof for encrypted salary
     /// @param position Position name
+        /// @notice Submit new salary entry with encryption
     function submitSalary(
         externalEuint32 encryptedSalary,
         bytes calldata inputProof,
@@ -343,3 +344,4 @@ contract SalaryVault is SepoliaConfig {
         return _activeEntryCount;
     }
 }
+
