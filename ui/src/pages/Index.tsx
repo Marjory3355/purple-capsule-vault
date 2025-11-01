@@ -28,6 +28,7 @@ import {
 } from "@/lib/contract";
 import { getFHEVMInstance, encryptSalary } from "@/lib/fhevm";
 
+// Main application component
 export default function Index() {
   const { address, isConnected, chainId } = useAccount();
   const [activeSection, setActiveSection] = useState<'home' | 'submit' | 'manage' | 'stats'>('home');
@@ -198,7 +199,7 @@ export default function Index() {
       await tx.wait();
 
       toast({
-        title: "Updated! ‚úÖ",
+        title: "Updated! ‚ú?,
         description: "Your salary entry has been updated successfully.",
       });
 
@@ -270,7 +271,7 @@ export default function Index() {
       const estimatedWaitTime = isTestnet ? "3-5 minutes" : "30-60 seconds";
       
       toast({
-        title: "Decryption request sent! ‚è≥",
+        title: "Decryption request sent! ‚è?,
         description: `Processing on ${isTestnet ? 'Sepolia testnet' : 'local network'}. Estimated wait: ${estimatedWaitTime}. You can continue browsing while waiting.`,
       });
 
@@ -290,7 +291,7 @@ export default function Index() {
           ? `${minutesElapsed}m ${secondsElapsed}s`
           : `${secondsElapsed}s`;
         
-        console.log(`‚è≥ Checking decryption status... [${timeStr} elapsed]`);
+        console.log(`‚è?Checking decryption status... [${timeStr} elapsed]`);
         
         try {
           const stats = await getGlobalStats(provider, chainId);
@@ -307,7 +308,7 @@ export default function Index() {
             clearInterval(pollInterval);
             setIsWaitingForDecryption(false);
             toast({
-              title: "‚è∞ Decryption timeout",
+              title: "‚è?Decryption timeout",
               description: "The decryption is taking longer than expected. Click 'Check Now' button to manually verify if it's complete.",
             });
           } else if (pollCount % 6 === 0) {
@@ -358,7 +359,7 @@ export default function Index() {
       try {
         await navigator.clipboard.writeText(command);
         toast({
-          title: "‚úÖ Command Copied",
+          title: "‚ú?Command Copied",
           description: "Please paste and run in terminal",
         });
       } catch (err) {
@@ -459,7 +460,7 @@ export default function Index() {
       setDecryptedMySalary(salaryValue);
 
       toast({
-        title: "‚úÖ Decryption Successful!",
+        title: "‚ú?Decryption Successful!",
         description: `Your monthly salary is $${salaryValue.toLocaleString()}`,
       });
     } catch (error: any) {
@@ -670,7 +671,7 @@ export default function Index() {
                 {hasSubmission && userEntry && (
                   <div className="mt-6 p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
                     <p className="text-green-800 dark:text-green-300 font-semibold">
-                      ‚úÖ You have submitted salary data
+                      ‚ú?You have submitted salary data
                     </p>
                     <p className="text-green-700 dark:text-green-400 mt-1">
                       Position: <strong>{userEntry.position}</strong>
@@ -775,7 +776,7 @@ export default function Index() {
                           ${decryptedMySalary.toLocaleString()} / month
                         </p>
                         <p className="text-xs text-gray-500 mt-1">
-                          ‚úÖ Decrypted (only visible to you)
+                          ‚ú?Decrypted (only visible to you)
                         </p>
                       </div>
                     ) : (
@@ -864,7 +865,7 @@ export default function Index() {
                       {isWaitingForDecryption ? (
                         <>
                           <p className="text-yellow-600 dark:text-yellow-400 mb-4 flex items-center justify-center gap-2">
-                            <span className="animate-spin">‚è≥</span>
+                            <span className="animate-spin">‚è?/span>
                             Waiting for decryption to complete...
                           </p>
                           <Button 
@@ -914,7 +915,7 @@ export default function Index() {
                                 variant="outline"
                                 className="border-purple-500 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20"
                               >
-                                üõ†Ô∏è Use Manual Script to Decrypt
+                                üõ†Ô∏?Use Manual Script to Decrypt
                               </Button>
                             )}
                           </div>
@@ -1008,3 +1009,4 @@ export default function Index() {
     </div>
   );
 }
+
