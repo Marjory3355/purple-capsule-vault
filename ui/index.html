@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salary Vault - Privacy-Preserving Compensation Analysis</title>
+    <meta name="description" content="Submit encrypted salaries and discover industry averages without revealing your personal data. Built with FHEVM by Zama." />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    
+    <!-- Load Zama Relayer SDK UMD bundle before the app -->
+    <!-- This sets up window.relayerSDK which is required by @zama-fhe/relayer-sdk/bundle -->
+    <script src="https://cdn.zama.ai/relayer-sdk-js/0.2.0/relayer-sdk-js.umd.cjs" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
