@@ -8,3 +8,6 @@ export const WalletButton = () => {
 
 
 
+
+// Wallet connection handler
+
