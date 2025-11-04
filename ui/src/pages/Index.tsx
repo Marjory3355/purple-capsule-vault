@@ -113,7 +113,8 @@ export default function Index() {
     }
   }, [address, chainId, isConnected, loadUserData, loadStatistics]);
 
-  const handleSubmitSalary = async (e: React.FormEvent) => {
+      // Handle salary submission with encryption
+    const handleSubmitSalary = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!address || !isConnected) {
       toast({
@@ -1009,4 +1010,5 @@ export default function Index() {
     </div>
   );
 }
+
 
