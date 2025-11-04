@@ -222,6 +222,7 @@ contract SalaryVault is SepoliaConfig {
     }
 
     /// @notice Request decryption of global statistics
+        /// @notice Request decryption of global statistics
     function requestGlobalStats() external {
         require(_activeEntryCount > 0, "No data to decrypt");
         require(!_statsFinalized, "Stats already finalized");
@@ -346,6 +347,7 @@ contract SalaryVault is SepoliaConfig {
         return _activeEntryCount;
     }
 }
+
 
 
 
