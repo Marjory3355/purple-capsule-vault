@@ -29,6 +29,7 @@ contract SalaryVault is SepoliaConfig {
     uint32 private _activeEntryCount; // Active entry count
     
     // Position-based statistics
+        // Position-based encrypted totals
     mapping(bytes32 => euint32) private _encryptedPositionTotal; // Encrypted position salary sum
     mapping(bytes32 => uint32) private _positionCount; // Position entry count
     
@@ -344,4 +345,5 @@ contract SalaryVault is SepoliaConfig {
         return _activeEntryCount;
     }
 }
+
 
