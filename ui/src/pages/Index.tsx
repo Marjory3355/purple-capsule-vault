@@ -837,7 +837,7 @@ export default function Index() {
           </div>
         )}
 
-        {/* Statistics Section */}
+        {/* Statistics Display Section */}
         {activeSection === 'stats' && (
           <div className="max-w-4xl mx-auto space-y-6">
             <Card className="border-2">
@@ -1010,5 +1010,6 @@ export default function Index() {
     </div>
   );
 }
+
 
 
