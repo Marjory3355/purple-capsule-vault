@@ -265,7 +265,7 @@ contract SalaryVault is SepoliaConfig {
     /// @param position Position name
     function requestPositionStats(string memory position) external {
         bytes32 positionHash = keccak256(bytes(position));
-        require(_positionCount[positionHash] > 0, "No data for this position");
+                require(_positionCount[positionHash] > 0, "No data for this position");
         require(!_positionFinalized[positionHash], "Position stats already finalized");
         
         bytes32[] memory cts = new bytes32[](1);
@@ -283,7 +283,7 @@ contract SalaryVault is SepoliaConfig {
         bytes32 positionHash = _positionStatsRequest[requestId];
         require(positionHash != bytes32(0), "Invalid request");
         require(!_positionFinalized[positionHash], "Already finalized");
-        require(_positionCount[positionHash] > 0, "No data");
+                require(_positionCount[positionHash] > 0, "No data");
         
         uint32 totalSalary;
         require(cleartexts.length >= 4, "Invalid cleartext length");
@@ -347,6 +347,7 @@ contract SalaryVault is SepoliaConfig {
         return _activeEntryCount;
     }
 }
+
 
 
 
