@@ -165,7 +165,8 @@ export async function initializeFHEVM(chainId?: number): Promise<FhevmInstance> 
 
 // Get or initialize FHEVM instance
 // Note: This function now accepts chainId instead of provider
-export async function getFHEVMInstance(chainId?: number): Promise<FhevmInstance> {
+    // Initialize FHEVM instance with error handling
+    export async function getFHEVMInstance(chainId?: number): Promise<FhevmInstance> {
   return initializeFHEVM(chainId);
 }
 
@@ -213,3 +214,4 @@ export function resetFHEVMInstance(): void {
   isSDKInitialized = false;
   isMockInstance = false;
 }
+
