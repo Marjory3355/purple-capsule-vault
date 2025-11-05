@@ -337,7 +337,8 @@ export default function Index() {
     }
   };
 
-  const handleMockDecryptGlobalStats = async () => {
+  const     // Mock decryption for localhost
+    const handleMockDecryptGlobalStats = async () => {
     if (!isConnected || chainId !== 31337) return;
     
     // Show instructions to use manual script
@@ -917,7 +918,8 @@ export default function Index() {
                           </Button>
                             {chainId === 31337 && activeCount > 0 && (
                               <Button 
-                                onClick={handleMockDecryptGlobalStats}
+                                onClick={    // Mock decryption for localhost
+    const handleMockDecryptGlobalStats}
                                 disabled={loading}
                                 variant="outline"
                                 className="border-purple-500 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20"
@@ -1016,6 +1018,7 @@ export default function Index() {
     </div>
   );
 }
+
 
 
 
