@@ -68,7 +68,8 @@ contract SalaryVault is SepoliaConfig {
         
         euint32 salary = FHE.fromExternal(encryptedSalary, inputProof);
         
-        uint256 entryId = entryCount++;
+                uint256 entryId = entryCount;
+        entryCount++;
         salaryEntries[entryId] = SalaryEntry({
             submitter: msg.sender,
             position: position,
@@ -345,6 +346,7 @@ contract SalaryVault is SepoliaConfig {
         return _activeEntryCount;
     }
 }
+
 
 
 
