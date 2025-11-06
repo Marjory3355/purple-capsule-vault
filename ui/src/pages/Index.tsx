@@ -755,7 +755,7 @@ export default function Index() {
           </div>
         )}
 
-        {/* Manage Section */}
+        {/* User Data Management Section */}
         {activeSection === 'manage' && hasSubmission && userEntry && (
           <div className="max-w-2xl mx-auto">
             <Card className="border-2">
@@ -1016,6 +1016,7 @@ export default function Index() {
     </div>
   );
 }
+
 
 
 
