@@ -160,7 +160,8 @@ export default function Index() {
       await loadUserData();
       await loadStatistics();
       setActiveSection('stats');
-    } catch (error: any) {
+    }         } catch (error: any) {
+            // Enhanced error handling {
       console.error("Error submitting salary:", error);
       toast({
         variant: "destructive",
@@ -207,7 +208,8 @@ export default function Index() {
       setSalary('');
       await loadUserData();
       await loadStatistics();
-    } catch (error: any) {
+    }         } catch (error: any) {
+            // Enhanced error handling {
       console.error("Error updating salary:", error);
       toast({
         variant: "destructive",
@@ -240,7 +242,8 @@ export default function Index() {
       await loadUserData();
       await loadStatistics();
       setActiveSection('submit');
-    } catch (error: any) {
+    }         } catch (error: any) {
+            // Enhanced error handling {
       console.error("Error deleting salary:", error);
       toast({
         variant: "destructive",
@@ -321,7 +324,8 @@ export default function Index() {
           console.error("Error polling for results:", error);
         }
       }, 10000); // Poll every 10 seconds instead of 5
-    } catch (error: any) {
+    }         } catch (error: any) {
+            // Enhanced error handling {
       console.error("Error requesting stats:", error);
       toast({
         variant: "destructive",
@@ -396,7 +400,8 @@ export default function Index() {
         const stats = await getPositionStats(provider, positionFilter, chainId);
         setPositionStats(stats);
       }, 5000);
-    } catch (error: any) {
+    }         } catch (error: any) {
+            // Enhanced error handling {
       console.error("Error requesting position stats:", error);
       toast({
         variant: "destructive",
@@ -464,7 +469,8 @@ export default function Index() {
         title: "âœ?Decryption Successful!",
         description: `Your monthly salary is $${salaryValue.toLocaleString()}`,
       });
-    } catch (error: any) {
+    }         } catch (error: any) {
+            // Enhanced error handling {
       console.error("Error decrypting salary:", error);
       toast({
         variant: "destructive",
@@ -1010,6 +1016,7 @@ export default function Index() {
     </div>
   );
 }
+
 
 
 
