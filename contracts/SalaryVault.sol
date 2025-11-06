@@ -62,7 +62,7 @@ contract SalaryVault is SepoliaConfig {
         bytes calldata inputProof,
         string memory position
     ) external {
-        require(!hasSubmitted[msg.sender], "Already submitted");
+                require(!hasSubmitted[msg.sender], "Already submitted");
         require(bytes(position).length > 0, "Position cannot be empty");
         require(bytes(position).length <= 100, "Position too long");
         
@@ -346,6 +346,7 @@ contract SalaryVault is SepoliaConfig {
         return _activeEntryCount;
     }
 }
+
 
 
 
