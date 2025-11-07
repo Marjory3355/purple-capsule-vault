@@ -99,6 +99,9 @@ A privacy-preserving salary statistics and compensation equality analysis platfo
 
 ## Deployment
 
+### Quick Start
+
+
 ### Deploy to Local Network
 
 1. **Start a local FHEVM-ready node**
@@ -183,7 +186,7 @@ The application now includes a comprehensive multi-page interface:
 - 🔐 **Client-Side Encryption** - All salary data encrypted before submission
 - 📊 **Aggregate Statistics** - View decrypted average salaries
 - ✏️ **Update Capability** - Modify your salary entry anytime
-- 🗑️ **Delete Option** - Remove your entry completely
+- 🗑�?**Delete Option** - Remove your entry completely
 - 🔄 **Real-Time Feedback** - Toast notifications for all actions
 - 📱 **Responsive Design** - Works on all devices
 
@@ -194,20 +197,20 @@ See [IMPROVEMENTS.md](IMPROVEMENTS.md) for detailed documentation of all enhance
 ```
 purple-capsule-vault/
 ├── contracts/              # Smart contract source files
-│   └── SalaryVault.sol    # Main salary vault contract
+�?  └── SalaryVault.sol    # Main salary vault contract
 ├── deploy/                # Deployment scripts
 ├── tasks/                 # Task scripts for testing
-│   ├── SalaryVault.ts    # Local network test script
-│   └── SalaryVaultSepolia.ts # Sepolia test script
+�?  ├── SalaryVault.ts    # Local network test script
+�?  └── SalaryVaultSepolia.ts # Sepolia test script
 ├── test/                  # Test files
 ├── ui/                    # Frontend application
-│   ├── src/
-│   │   ├── components/   # React components
-│   │   ├── pages/        # Page components
-│   │   ├── lib/          # Utility functions
-│   │   ├── abi/          # Contract ABIs and addresses
-│   │   └── hooks/        # Custom React hooks
-│   └── public/           # Static assets
+�?  ├── src/
+�?  �?  ├── components/   # React components
+�?  �?  ├── pages/        # Page components
+�?  �?  ├── lib/          # Utility functions
+�?  �?  ├── abi/          # Contract ABIs and addresses
+�?  �?  └── hooks/        # Custom React hooks
+�?  └── public/           # Static assets
 ├── hardhat.config.ts     # Hardhat configuration
 └── package.json          # Dependencies and scripts
 ```
@@ -278,3 +281,4 @@ This project is licensed under the BSD-3-Clause-Clear License. See the [LICENSE]
 ---
 
 **Built with privacy in mind using FHEVM by Zama** 🔒
+
