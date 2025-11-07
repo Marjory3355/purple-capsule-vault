@@ -33,7 +33,8 @@ export default function Index() {
   const { address, isConnected, chainId } = useAccount();
   const [activeSection, setActiveSection] = useState<'home' | 'submit' | 'manage' | 'stats'>('home');
   const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
+      // Toast notification system
+    const { toast } = useToast();
 
   // User submission state
   const [hasSubmission, setHasSubmission] = useState(false);
@@ -1018,6 +1019,7 @@ export default function Index() {
     </div>
   );
 }
+
 
 
 
