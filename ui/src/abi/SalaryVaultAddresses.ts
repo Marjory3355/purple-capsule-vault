@@ -1,0 +1,4 @@
+export const SALARY_VAULT_ADDRESS = {
+  localhost: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  sepolia: "0x6cA0794e151572A2e71478c7eD5580E6E537ac61",
+};
