@@ -375,7 +375,14 @@ export default function Index() {
   };
 
   const handleRequestPositionStats = async () => {
-    if (!isConnected || !positionFilter) return;
+    if (!isConnected || !positionFilter) {
+      toast({
+        variant: "destructive",
+        title: "Missing information",
+        description: "Please enter a position name to query statistics.",
+      });
+      return;
+    }
     setLoading(true);
     try {
       const ethereum = (window as any).ethereum;
@@ -395,8 +402,12 @@ export default function Index() {
       });
 
       setTimeout(async () => {
-        const stats = await getPositionStats(provider, positionFilter, chainId);
-        setPositionStats(stats);
+        try {
+          const stats = await getPositionStats(provider, positionFilter, chainId);
+          setPositionStats(stats);
+        } catch (error) {
+          console.error("Error loading position stats:", error);
+        }
       }, 5000);
     } catch (error: any) {
       console.error("Error requesting position stats:", error);
