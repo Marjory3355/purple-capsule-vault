@@ -137,7 +137,11 @@ contract SalaryVault is SepoliaConfig {
         // Add new salary to aggregate data
         _encryptedTotalSalary = FHE.add(_encryptedTotalSalary, newSalary);
         bytes32 newPositionHash = keccak256(bytes(newPosition));
-        _encryptedPositionTotal[newPositionHash] = FHE.add(_encryptedPositionTotal[newPositionHash], newSalary);
+        if (_positionCount[newPositionHash] == 0) {
+            _encryptedPositionTotal[newPositionHash] = newSalary;
+        } else {
+            _encryptedPositionTotal[newPositionHash] = FHE.add(_encryptedPositionTotal[newPositionHash], newSalary);
+        }
         _positionCount[newPositionHash]++;
         
         // Update permissions
@@ -164,6 +168,10 @@ contract SalaryVault is SepoliaConfig {
         bytes32 positionHash = keccak256(bytes(entry.position));
         _encryptedPositionTotal[positionHash] = FHE.sub(_encryptedPositionTotal[positionHash], entry.encryptedSalary);
         _positionCount[positionHash]--;
+        
+        if (_positionCount[positionHash] == 0) {
+            delete _encryptedPositionTotal[positionHash];
+        }
         
         entry.isActive = false;
         hasSubmitted[msg.sender] = false;
