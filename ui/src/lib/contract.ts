@@ -59,6 +59,12 @@ export async function hasUserSubmitted(
     return await contract.hasSubmitted(userAddress);
   } catch (error: any) {
     console.error("Error checking submission status:", error);
+    if (error.message?.includes("network") || error.message?.includes("connection")) {
+      throw new Error(
+        `Network error: ${error.message}\n` +
+        "Please check your network connection and try again."
+      );
+    }
     throw new Error(
       `Failed to check submission status: ${error.message || "Unknown error"}\n` +
       "Please ensure you're connected to the correct network."
