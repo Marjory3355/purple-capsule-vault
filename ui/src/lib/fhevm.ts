@@ -122,8 +122,13 @@ export async function initializeFHEVM(chainId?: number): Promise<FhevmInstance> 
       // Add a small delay to ensure SDK is fully initialized
       await new Promise(resolve => setTimeout(resolve, 100));
       
-      fhevmInstance = await createInstance(config);
-      console.log("FHEVM instance created successfully");
+      // Cache instance to avoid recreating
+      if (!fhevmInstance) {
+        fhevmInstance = await createInstance(config);
+        console.log("FHEVM instance created successfully");
+      } else {
+        console.log("Reusing existing FHEVM instance");
+      }
     } catch (error: any) {
       console.error("Failed to create FHEVM instance:", error);
       
