@@ -259,9 +259,9 @@ contract SalaryVault is SepoliaConfig {
             totalSalary := shr(224, mload(add(cleartexts, 32)))
         }
         
-        // Calculate average (allow zero totals for edge cases)
-        // If totalSalary is 0, average will be 0
-        _decryptedAverageSalary = _activeEntryCount > 0 ? totalSalary / _activeEntryCount : 0;
+        // Calculate average (prevent division by zero)
+        require(_activeEntryCount > 0, "No active entries");
+        _decryptedAverageSalary = totalSalary / _activeEntryCount;
         
         // Mark as completed before emitting event (checks-effects-interactions)
         _statsFinalized = true;
