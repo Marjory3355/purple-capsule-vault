@@ -129,6 +129,11 @@ contract SalaryVault is SepoliaConfig {
         _encryptedPositionTotal[oldPositionHash] = FHE.sub(_encryptedPositionTotal[oldPositionHash], entry.encryptedSalary);
         _positionCount[oldPositionHash]--;
         
+        // Clean up if position count reaches zero
+        if (_positionCount[oldPositionHash] == 0) {
+            delete _encryptedPositionTotal[oldPositionHash];
+        }
+        
         // Update entry
         entry.encryptedSalary = newSalary;
         entry.position = newPosition;
