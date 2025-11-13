@@ -149,13 +149,13 @@ contract SalaryVault is SepoliaConfig {
         }
         _positionCount[newPositionHash]++;
         
-        // Update permissions
+        // Update permissions - optimize to only set necessary permissions
         FHE.allowThis(newSalary);
         FHE.allow(newSalary, msg.sender);
         FHE.allowThis(_encryptedTotalSalary);
         FHE.allowThis(_encryptedPositionTotal[newPositionHash]);
         
-        // Clean up old position permissions if needed
+        // Clean up old position permissions if still has entries
         if (_positionCount[oldPositionHash] > 0) {
             FHE.allowThis(_encryptedPositionTotal[oldPositionHash]);
         }
