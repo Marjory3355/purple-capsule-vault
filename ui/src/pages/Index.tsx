@@ -1004,7 +1004,7 @@ export default function Index() {
                   )}
                 </div>
 
-                {positionStats && positionStats.finalized && (
+                {positionStats && positionStats.finalized ? (
                   <div className="p-6 rounded-lg bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border-2 border-indigo-200 dark:border-indigo-800">
                     <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-2">
                       Position: <strong>{positionFilter}</strong>
@@ -1013,10 +1013,16 @@ export default function Index() {
                       ${positionStats.average.toLocaleString()} / month
                     </div>
                     <p className="text-indigo-600 dark:text-indigo-400 mt-2">
-                      Based on data from {positionStats.count} users
+                      Based on data from {positionStats.count} {positionStats.count === 1 ? 'user' : 'users'}
                     </p>
                   </div>
-                )}
+                ) : positionStats && !positionStats.finalized ? (
+                  <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800">
+                    <p className="text-yellow-600 dark:text-yellow-400">
+                      Position statistics are being decrypted. Please wait...
+                    </p>
+                  </div>
+                ) : null}
               </CardContent>
             </Card>
           </div>
