@@ -276,6 +276,7 @@ export default function Index() {
       toast({
         title: "Decryption request sent! ⏳",
         description: `Processing on ${isTestnet ? 'Sepolia testnet' : 'local network'}. Estimated wait: ${estimatedWaitTime}. You can continue browsing while waiting.`,
+        duration: 5000,
       });
 
       // Allow user to continue browsing
@@ -306,6 +307,7 @@ export default function Index() {
             toast({
               title: "🎉 Decryption complete!",
               description: `Average salary: $${stats.average.toLocaleString()}/month (took ${timeStr})`,
+              duration: 5000,
             });
           } else if (pollCount >= maxPolls) {
             clearInterval(pollInterval);
