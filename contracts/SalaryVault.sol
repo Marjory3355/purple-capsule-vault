@@ -181,13 +181,14 @@ contract SalaryVault is SepoliaConfig {
         
         if (_positionCount[positionHash] == 0) {
             delete _encryptedPositionTotal[positionHash];
+        } else {
+            FHE.allowThis(_encryptedPositionTotal[positionHash]);
         }
         
         entry.isActive = false;
         hasSubmitted[msg.sender] = false;
         
         FHE.allowThis(_encryptedTotalSalary);
-        FHE.allowThis(_encryptedPositionTotal[positionHash]);
         
         emit SalaryDeleted(entryId, msg.sender);
     }
