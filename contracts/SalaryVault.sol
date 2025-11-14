@@ -229,6 +229,7 @@ contract SalaryVault is SepoliaConfig {
     /// @return encryptedTotal Encrypted sum for this position
     /// @return count Entry count for this position
     function getEncryptedPositionStats(string memory position) external view returns (euint32 encryptedTotal, uint32 count) {
+        require(bytes(position).length > 0, "Position cannot be empty");
         bytes32 positionHash = keccak256(bytes(position));
         return (_encryptedPositionTotal[positionHash], _positionCount[positionHash]);
     }
