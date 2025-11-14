@@ -83,22 +83,14 @@ export default function Index() {
       const ethereum = (window as any).ethereum;
       const provider = new BrowserProvider(ethereum, "any");
       
-      // Log network and contract info for debugging
-      console.log("Loading statistics...");
-      console.log("- Chain ID:", chainId);
-      console.log("- Contract address:", getContractAddress(chainId));
+      // Load statistics in parallel for better performance
+      const [count, stats] = await Promise.all([
+        getActiveEntryCount(provider, chainId),
+        getGlobalStats(provider, chainId)
+      ]);
       
-      const count = await getActiveEntryCount(provider, chainId);
-      console.log("- Active entry count:", count);
       setActiveCount(count);
-      
-      const stats = await getGlobalStats(provider, chainId);
-      console.log("- Global stats:", stats);
       setGlobalStats(stats);
-      
-      if (stats.finalized && stats.average > 0) {
-        console.log("Statistics are available");
-      }
     } catch (error) {
       console.error("Error loading statistics:", error);
       toast({
