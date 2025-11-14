@@ -167,6 +167,8 @@ export async function submitSalary(
       throw new Error("Transaction was rejected by user.");
     } else if (error.message?.includes("insufficient funds")) {
       throw new Error("Insufficient funds to pay for gas. Please add more ETH to your wallet.");
+    } else if (error.message?.includes("network") || error.code === "NETWORK_ERROR") {
+      throw new Error("Network error occurred. Please check your connection and try again.");
     } else {
       throw new Error(`Failed to submit salary: ${error.message || "Unknown error"}`);
     }
