@@ -395,14 +395,37 @@ export default function Index() {
         description: "Position statistics will be available shortly.",
       });
 
-      setTimeout(async () => {
+      // Poll for position stats with retry logic
+      let retryCount = 0;
+      const maxRetries = 12; // Poll for up to 1 minute
+      const pollPositionStats = async () => {
         try {
           const stats = await getPositionStats(provider, positionFilter, chainId);
-          setPositionStats(stats);
+          if (stats.finalized) {
+            setPositionStats(stats);
+            setLoading(false);
+          } else if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(pollPositionStats, 5000);
+          } else {
+            setLoading(false);
+            toast({
+              variant: "destructive",
+              title: "Timeout",
+              description: "Position statistics decryption is taking longer than expected.",
+            });
+          }
         } catch (error) {
           console.error("Error loading position stats:", error);
+          if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(pollPositionStats, 5000);
+          } else {
+            setLoading(false);
+          }
         }
-      }, 5000);
+      };
+      setTimeout(pollPositionStats, 5000);
     } catch (error: any) {
       console.error("Error requesting position stats:", error);
       toast({
