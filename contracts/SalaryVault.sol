@@ -276,6 +276,7 @@ contract SalaryVault is SepoliaConfig {
     /// @notice Request decryption of position-specific statistics
     /// @param position Position name
     function requestPositionStats(string memory position) external {
+        require(bytes(position).length > 0, "Position cannot be empty");
         bytes32 positionHash = keccak256(bytes(position));
         require(_positionCount[positionHash] > 0, "No data for this position");
         require(!_positionFinalized[positionHash], "Position stats already finalized");
