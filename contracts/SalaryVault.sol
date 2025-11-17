@@ -243,6 +243,7 @@ contract SalaryVault is SepoliaConfig {
         cts[0] = FHE.toBytes32(_encryptedTotalSalary);
         
         uint256 requestId = FHE.requestDecryption(cts, this.globalStatsCallback.selector);
+        require(requestId > 0, "Invalid decryption request");
         _globalStatsRequest[requestId] = true;
         
         emit StatsRequested(requestId);
@@ -285,6 +286,7 @@ contract SalaryVault is SepoliaConfig {
         cts[0] = FHE.toBytes32(_encryptedPositionTotal[positionHash]);
         
         uint256 requestId = FHE.requestDecryption(cts, this.positionStatsCallback.selector);
+        require(requestId > 0, "Invalid decryption request");
         _positionStatsRequest[requestId] = positionHash;
         
         emit PositionStatsRequested(positionHash, requestId);
