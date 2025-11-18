@@ -134,7 +134,7 @@ contract SalaryVault is SepoliaConfig {
             delete _encryptedPositionTotal[oldPositionHash];
         }
         
-        // Update entry
+        // Update entry - ensure atomic update
         entry.encryptedSalary = newSalary;
         entry.position = newPosition;
         entry.timestamp = block.timestamp;
