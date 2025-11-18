@@ -50,6 +50,7 @@ export default function Index() {
   const [isWaitingForDecryption, setIsWaitingForDecryption] = useState(false);
   const [decryptedMySalary, setDecryptedMySalary] = useState<number | null>(null);
   const [isDecryptingMySalary, setIsDecryptingMySalary] = useState(false);
+  const [isLoadingStats, setIsLoadingStats] = useState(false);
 
   const loadUserData = useCallback(async () => {
     if (!address) return;
@@ -79,6 +80,7 @@ export default function Index() {
 
   const loadStatistics = useCallback(async () => {
     if (!isConnected) return;
+    setIsLoadingStats(true);
     try {
       const ethereum = (window as any).ethereum;
       const provider = new BrowserProvider(ethereum, "any");
@@ -98,6 +100,8 @@ export default function Index() {
         title: "Error loading statistics",
         description: error instanceof Error ? error.message : "Failed to load statistics",
       });
+    } finally {
+      setIsLoadingStats(false);
     }
   }, [isConnected, chainId, toast]);
 
