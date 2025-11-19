@@ -123,10 +123,13 @@ contract SalaryVault is SepoliaConfig {
         
         euint32 newSalary = FHE.fromExternal(encryptedSalary, inputProof);
         
+        // Store old encrypted salary for subtraction
+        euint32 oldEncryptedSalary = entry.encryptedSalary;
+        
         // Remove old salary from aggregate data
-        _encryptedTotalSalary = FHE.sub(_encryptedTotalSalary, entry.encryptedSalary);
+        _encryptedTotalSalary = FHE.sub(_encryptedTotalSalary, oldEncryptedSalary);
         bytes32 oldPositionHash = keccak256(bytes(entry.position));
-        _encryptedPositionTotal[oldPositionHash] = FHE.sub(_encryptedPositionTotal[oldPositionHash], entry.encryptedSalary);
+        _encryptedPositionTotal[oldPositionHash] = FHE.sub(_encryptedPositionTotal[oldPositionHash], oldEncryptedSalary);
         _positionCount[oldPositionHash]--;
         
         // Clean up if position count reaches zero
