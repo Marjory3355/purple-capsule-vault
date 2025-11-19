@@ -13,32 +13,44 @@ export interface SalaryEntry {
   isActive: boolean;
 }
 
+// Cache contract addresses to avoid repeated lookups
+const addressCache = new Map<number, string>();
+
 export function getContractAddress(chainId?: number): string {
   const id = chainId ?? 31337;
+  
+  // Check cache first
+  if (addressCache.has(id)) {
+    return addressCache.get(id)!;
+  }
+  
+  let address: string;
   if (id === 31337) {
-    const address = SALARY_VAULT_ADDRESS.localhost;
+    address = SALARY_VAULT_ADDRESS.localhost;
     if (!address || address === "0x0000000000000000000000000000000000000000") {
       throw new Error(
         "SalaryVault contract address not configured for localhost.\n" +
         "Please deploy the contract first: npm run deploy:local"
       );
     }
-    return address;
-  }
-  if (id === 11155111) {
-    const address = SALARY_VAULT_ADDRESS.sepolia;
+  } else if (id === 11155111) {
+    address = SALARY_VAULT_ADDRESS.sepolia;
     if (!address || address === "0x0000000000000000000000000000000000000000") {
       throw new Error(
         "SalaryVault contract address not configured for Sepolia.\n" +
         "Please deploy the contract first: npm run deploy:sepolia"
       );
     }
-    return address;
+  } else {
+    throw new Error(
+      `Unsupported network (chainId: ${id}).\n` +
+      "Supported networks: Localhost (31337), Sepolia (11155111)"
+    );
   }
-  throw new Error(
-    `Unsupported network (chainId: ${id}).\n` +
-    "Supported networks: Localhost (31337), Sepolia (11155111)"
-  );
+  
+  // Cache the address
+  addressCache.set(id, address);
+  return address;
 }
 
 export function getSalaryVaultContract(
