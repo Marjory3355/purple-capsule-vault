@@ -129,6 +129,26 @@ export default function Index() {
       const provider = new BrowserProvider(ethereum, "any");
       const contractAddress = getContractAddress(chainId);
 
+      // Validate inputs before processing
+      if (!position || position.trim().length === 0) {
+        toast({
+          variant: "destructive",
+          title: "Invalid input",
+          description: "Position cannot be empty.",
+        });
+        return;
+      }
+      
+      const salaryValue = parseInt(salary);
+      if (isNaN(salaryValue) || salaryValue <= 0) {
+        toast({
+          variant: "destructive",
+          title: "Invalid input",
+          description: "Please enter a valid salary amount.",
+        });
+        return;
+      }
+
       toast({
         title: "Encrypting salary...",
         description: "Your salary is being encrypted client-side.",
@@ -136,7 +156,6 @@ export default function Index() {
 
       // Initialize FHEVM and encrypt salary
       const fhevmInstance = await getFHEVMInstance(chainId);
-      const salaryValue = parseInt(salary);
       const encrypted = await encryptSalary(fhevmInstance, contractAddress, address, salaryValue);
 
       toast({
