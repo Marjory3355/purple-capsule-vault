@@ -1,45 +1,49 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import Header from "@/components/Header";
 import { Home, ArrowLeft } from "lucide-react";
 
-const NotFound = () => {
+export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <div className="container mx-auto px-4 py-16">
-        <Card className="max-w-md mx-auto">
-          <CardContent className="py-16 text-center space-y-6">
-            <div className="text-8xl font-bold text-purple-600">404</div>
-            <h1 className="text-3xl font-bold">Page Not Found</h1>
-            <p className="text-muted-foreground">
-              The page you're looking for doesn't exist or has been moved.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                onClick={() => navigate(-1)}
-                variant="outline"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Go Back
-              </Button>
-              <Button
-                onClick={() => navigate("/")}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
-                <Home className="mr-2 h-4 w-4" />
-                Go Home
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-purple-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-violet-950 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center space-y-6"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+          className="text-9xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent"
+        >
+          404
+        </motion.div>
+        
+        <h1 className="text-2xl font-bold mb-2">Page Not Found</h1>
+        <p className="text-muted-foreground max-w-md">
+          Sorry, the page you are looking for does not exist or has been removed.
+        </p>
+
+        <div className="flex gap-3 justify-center">
+          <Button
+            onClick={() => navigate(-1)}
+            variant="outline"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Go Back
+          </Button>
+          <Button
+            onClick={() => navigate("/")}
+            className="bg-gradient-to-r from-violet-600 to-purple-600"
+          >
+            <Home className="h-4 w-4 mr-2" />
+            Go Home
+          </Button>
+        </div>
+      </motion.div>
     </div>
   );
-};
-
-export default NotFound;
-
+}

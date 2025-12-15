@@ -40,10 +40,14 @@ export interface SalaryVaultInterface extends Interface {
       | "hasSubmitted"
       | "isPositionStatsFinalized"
       | "isStatsFinalized"
+      | "mockGlobalStatsCallback"
+      | "mockPositionStatsCallback"
       | "positionStatsCallback"
       | "protocolId"
       | "requestGlobalStats"
       | "requestPositionStats"
+      | "resetGlobalStats"
+      | "resetPositionStats"
       | "salaryEntries"
       | "submitSalary"
       | "updateSalary"
@@ -118,6 +122,14 @@ export interface SalaryVaultInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "mockGlobalStatsCallback",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mockPositionStatsCallback",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "positionStatsCallback",
     values: [BigNumberish, BytesLike, BytesLike[]]
   ): string;
@@ -131,6 +143,14 @@ export interface SalaryVaultInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "requestPositionStats",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resetGlobalStats",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "resetPositionStats",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -201,6 +221,14 @@ export interface SalaryVaultInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "mockGlobalStatsCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mockPositionStatsCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "positionStatsCallback",
     data: BytesLike
   ): Result;
@@ -211,6 +239,14 @@ export interface SalaryVaultInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "requestPositionStats",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resetGlobalStats",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "resetPositionStats",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -461,6 +497,18 @@ export interface SalaryVault extends BaseContract {
 
   isStatsFinalized: TypedContractMethod<[], [boolean], "view">;
 
+  mockGlobalStatsCallback: TypedContractMethod<
+    [mockTotalSalary: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  mockPositionStatsCallback: TypedContractMethod<
+    [position: string, mockTotalSalary: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   positionStatsCallback: TypedContractMethod<
     [requestId: BigNumberish, cleartexts: BytesLike, arg2: BytesLike[]],
     [boolean],
@@ -472,6 +520,14 @@ export interface SalaryVault extends BaseContract {
   requestGlobalStats: TypedContractMethod<[], [void], "nonpayable">;
 
   requestPositionStats: TypedContractMethod<
+    [position: string],
+    [void],
+    "nonpayable"
+  >;
+
+  resetGlobalStats: TypedContractMethod<[], [void], "nonpayable">;
+
+  resetPositionStats: TypedContractMethod<
     [position: string],
     [void],
     "nonpayable"
@@ -583,6 +639,16 @@ export interface SalaryVault extends BaseContract {
     nameOrSignature: "isStatsFinalized"
   ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
+    nameOrSignature: "mockGlobalStatsCallback"
+  ): TypedContractMethod<[mockTotalSalary: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "mockPositionStatsCallback"
+  ): TypedContractMethod<
+    [position: string, mockTotalSalary: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
     nameOrSignature: "positionStatsCallback"
   ): TypedContractMethod<
     [requestId: BigNumberish, cleartexts: BytesLike, arg2: BytesLike[]],
@@ -597,6 +663,12 @@ export interface SalaryVault extends BaseContract {
   ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "requestPositionStats"
+  ): TypedContractMethod<[position: string], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "resetGlobalStats"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "resetPositionStats"
   ): TypedContractMethod<[position: string], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "salaryEntries"
